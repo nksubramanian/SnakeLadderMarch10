@@ -1,8 +1,12 @@
 from GameStatus import GameStatus
 class Board:
-    _all_position = set(range(1, 50))
-    _snake = {14: 2, 23: 8, 43: 41, 47: 37}
-    _ladder = {5: 10, 12: 26, 16: 29, 19: 33, 35: 36, 40: 45}
+    def __init__(self, last_position, snake, ladder):
+        self.last_position = last_position
+        self._all_position = set(range(1, last_position + 1))
+        self._snake = snake
+        self._ladder = ladder
+
+
     def Play(self, player, diceroll):
         if (player._position + diceroll) not in self._all_position:
             player.RemoveMoney(10)
@@ -17,11 +21,11 @@ class Board:
 
     def GameStatus(self,player):
         if player.IsMoneyAvailable()==False:
-            return GameStatus(-1)
-        if player._position==49:
-            return GameStatus(1)
+            return GameStatus.LOST
+        if player._position==self.last_position:
+            return GameStatus.WON
         else:
-            return GameStatus(0)
+            return GameStatus.PLAYING
 
 
 

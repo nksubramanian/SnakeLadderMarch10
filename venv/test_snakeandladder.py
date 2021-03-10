@@ -3,10 +3,13 @@ from Player import Player
 from Board import Board
 from GameStatus import GameStatus
 
-def test_player():
+def test_when_the_player_is_moved_then_player_is_in_right_position():
     player1 = Player(1, 500)
     player1.MoveTo(5)
     assert player1._position == 5
+
+
+    A='''
     player1.AddMoney(50)
     assert player1._money_available == 550
     player1.RemoveMoney(50)
@@ -20,9 +23,11 @@ def test_player():
     player3.RemoveMoney(550)
     assert board2.GameStatus(player3) == GameStatus(-1)
 
-def test_laddercheck():
+    def test_laddercheck():
     test2 = Player(1,500)
     Board.Play(test2,4)
     assert test2._position == 10
     assert test2._money_available == 600
+    
+    '''
 
